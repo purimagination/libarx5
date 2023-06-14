@@ -1,13 +1,13 @@
-#ifndef JOINT_TRAJECTORIES_H
-#define JOINT_TRAJECTORIES_H
+#ifndef TRAJECTORIES_H
+#define TRAJECTORIES_H
 
 #include <vector>
 
-class JointTrajectories
+class Trajectories
 {
 public:
-  JointTrajectories();
-  ~JointTrajectories() = default;
+  Trajectories();
+  ~Trajectories() = default;
   // 在轨迹队列中添加一个轨迹点
   void push(std::vector<double> joint_positions);
   // 删除轨迹队列中的第一个轨迹点

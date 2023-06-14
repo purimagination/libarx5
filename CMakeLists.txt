@@ -24,8 +24,8 @@ target_link_libraries(testHardwareInterface ${CMAKE_THREAD_LIBS_INIT} orocos-kdl
 add_executable(testRate src/testRate.cpp ${SDK_SOURCES} ${UTILS_SOURCES} ${LIBCAN_SOURCES} ${HARDWARE_SOURCES})
 target_link_libraries(testRate ${CMAKE_THREAD_LIBS_INIT} orocos-kdl)
 
-add_executable(testJointTrajectories src/testJointTrajectories.cpp ${SDK_SOURCES} ${UTILS_SOURCES} ${LIBCAN_SOURCES} ${HARDWARE_SOURCES})
-target_link_libraries(testJointTrajectories ${CMAKE_THREAD_LIBS_INIT} orocos-kdl)
+add_executable(testTrajectories src/testTrajectories.cpp ${SDK_SOURCES} ${UTILS_SOURCES} ${LIBCAN_SOURCES} ${HARDWARE_SOURCES})
+target_link_libraries(testTrajectories ${CMAKE_THREAD_LIBS_INIT} orocos-kdl)
 
 add_executable(testKinematicsDynamics src/testKinematicsDynamics.cpp ${SDK_SOURCES} ${UTILS_SOURCES} ${LIBCAN_SOURCES} ${HARDWARE_SOURCES})
 target_link_libraries(testKinematicsDynamics ${CMAKE_THREAD_LIBS_INIT} orocos-kdl)
