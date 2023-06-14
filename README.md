@@ -10,6 +10,9 @@ sudo apt-get install liborocos-kdl1.4 libkdl-parser-dev
 sudo apt-get install liborocos-kdl-dev libkdl-parser-dev
 ```
 
+## Software Architecture
+![architecture](docs/architecture.png)
+
 ## TODO List
 
 * HardwareInterface ✓
