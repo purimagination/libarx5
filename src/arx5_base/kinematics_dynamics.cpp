@@ -1,25 +1,30 @@
 #include "arx5_base/kinematics_dynamics.h"
 
+#include <filesystem>
+#include <fstream>
 #include <iostream>
 
 #include <kdl/chain.hpp>
 #include <kdl/chainfksolverpos_recursive.hpp>
 #include <kdl/chainiksolvervel_pinv.hpp>
 #include <kdl/chainiksolverpos_nr.hpp>
+#include <kdl_parser/kdl_parser.hpp>
 
 KinematicsDynamics::KinematicsDynamics()
 {
   // 构建机械臂抽象模型
-  chain.addSegment(
-      KDL::Segment(KDL::Joint(KDL::Joint::RotZ), generateFrame({ 0.0, 0.0, 0.11, 1.5707963267949, 0.0, 0.0 })));
-  chain.addSegment(KDL::Segment(KDL::Joint(KDL::Joint::RotZ), generateFrame({ -0.27, 0.0, 0.0, 0.0, 0.0, 0.0 })));
-  chain.addSegment(KDL::Segment(KDL::Joint(KDL::Joint::RotZ), generateFrame({ 0.27, 0.06, 0.0, 0.0, 0.0, 0.0 })));
-  chain.addSegment(
-      KDL::Segment(KDL::Joint(KDL::Joint::RotZ), generateFrame({ 0.067, 0.0, -0.00100000000000026, 0.0, 0.0, 0.0 })));
-  chain.addSegment(
-      KDL::Segment(KDL::Joint(KDL::Joint::RotY), generateFrame({ 0.1749, 0.0, 0.0, 1.5707963267949, 0.0, 0.0 })));
-  chain.addSegment(
-      KDL::Segment(KDL::Joint(KDL::Joint::RotX), generateFrame({ 0.0, 0.0, 0.0, -3.1415926535898, 0.0, 0.0 })));
+  // chain.addSegment(KDL::Segment(KDL::Joint(KDL::Joint::RotZ), generateFrame({ 0.0, 0.0, 0.11, 1.5707963267949, 0.0, 0.0 })));
+  // chain.addSegment(KDL::Segment(KDL::Joint(KDL::Joint::RotZ), generateFrame({ -0.27, 0.0, 0.0, 0.0, 0.0, 0.0 })));
+  // chain.addSegment(KDL::Segment(KDL::Joint(KDL::Joint::RotZ), generateFrame({ 0.27, 0.06, 0.0, 0.0, 0.0, 0.0 })));
+  // chain.addSegment(KDL::Segment(KDL::Joint(KDL::Joint::RotZ), generateFrame({ 0.067, 0.0, -0.00100000000000026, 0.0, 0.0, 0.0 })));
+  // chain.addSegment(KDL::Segment(KDL::Joint(KDL::Joint::RotY), generateFrame({ 0.1749, 0.0, 0.0, 1.5707963267949, 0.0, 0.0 })));
+  // chain.addSegment(KDL::Segment(KDL::Joint(KDL::Joint::RotX), generateFrame({ 0.0, 0.0, 0.0, -3.1415926535898, 0.0, 0.0 })));
+
+  // 通过读取urdf，构造chain
+  std::string urdf_path = "/home/hanzx/dev/projects/arx5/libarx5/urdf/arx5_kdl.urdf";
+  KDL::Tree tree;
+  kdl_parser::treeFromFile(urdf_path, tree);
+  bool exit_value = tree.getChain("base_link", "link6", chain);
 
   // 生成运动学求解器
   fksolver_pos = std::make_shared<KDL::ChainFkSolverPos_recursive>(chain);

@@ -43,5 +43,11 @@ int main()
   std::cout << "IK result: " << ik_result[0] << ", " << ik_result[1] << ", " << ik_result[2] << ", " << ik_result[3]
             << ", " << ik_result[4] << ", " << ik_result[5] << std::endl;
 
+  // 动力学逆解测试
+  end_effector_pose = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+  id_result = kinematics_dynamics.solveID(end_effector_pose);
+  std::cout << "ID result: " << id_result[0] << ", " << id_result[1] << ", " << id_result[2] << ", " << id_result[3]
+            << ", " << id_result[4] << ", " << id_result[5] << std::endl;
+
   return 0;
 }
