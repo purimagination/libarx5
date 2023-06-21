@@ -36,4 +36,7 @@ target_link_libraries(testStateEstimation ${CMAKE_THREAD_LIBS_INIT} orocos-kdl k
 add_executable(testAll src/test/testAll.cpp ${SDK_SOURCES} ${UTILS_SOURCES} ${LIBCAN_SOURCES} ${HARDWARE_SOURCES})
 target_link_libraries(testAll ${CMAKE_THREAD_LIBS_INIT} orocos-kdl kdl_parser)
 
+add_executable(calibrate src/examples/calibrate.cpp ${SDK_SOURCES} ${UTILS_SOURCES} ${LIBCAN_SOURCES} ${HARDWARE_SOURCES})
+target_link_libraries(calibrate ${CMAKE_THREAD_LIBS_INIT} orocos-kdl kdl_parser)
+
 add_library(arx5_sdk STATIC ${SDK_SOURCES} ${UTILS_SOURCES} ${LIBCAN_SOURCES} ${HARDWARE_SOURCES})
