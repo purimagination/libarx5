@@ -8,7 +8,7 @@ Recorder::Recorder(std::string file_name, float frequency)
   recording_data.append("\n");
 };
 
-void Recorder::updateRecording(std::vector<float> data)
+void Recorder::updateRecording(std::vector<double> data)
 {
   for (int i = 0; i < 6; i++)
   {
@@ -52,7 +52,7 @@ float Player::getFrequency()
   return frequency;
 }
 
-std::vector<float> Player::getData()
+std::vector<double> Player::getData()
 {
   for(int i=0; i<6; i++)
   {

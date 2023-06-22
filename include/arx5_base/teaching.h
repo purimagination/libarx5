@@ -11,7 +11,7 @@ class Recorder
     Recorder(std::string file_name, float frequency);
     ~Recorder() = default;
 
-    void updateRecording(std::vector<float> data);
+    void updateRecording(std::vector<double> data);
     void endRecording();
 
   private:
@@ -26,7 +26,7 @@ class Player
     ~Player() = default;
 
     float getFrequency();
-    std::vector<float> getData();
+    std::vector<double> getData();
     bool isEnd();
 
   private:
@@ -34,7 +34,7 @@ class Player
     std::string data;
     float frequency;
     int dataIndex = 0;
-    std::vector<float> top_data = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    std::vector<double> top_data = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 };
 
 #endif

@@ -8,7 +8,7 @@ int main()
   std::string file_name = "test";
   Recorder recorder(file_name, freq);
   Rate rate(freq);
-  std::vector<float> data = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+  std::vector<double> data = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
   for(int i=0; i<100; i++)
   {
@@ -25,7 +25,7 @@ int main()
   Player player(file_name);
   float freq2 = player.getFrequency();
   std::cout<<"data frequency: "<<freq2<<std::endl;
-  std::vector<float> data2 = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+  std::vector<double> data2 = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
   Rate rate2(freq2);
   while(!player.isEnd())
   {
