@@ -4,11 +4,11 @@ int main()
 {
   // 生成硬件接口对象
   HardwareInterface hardware_interface("real");
+  // 控制关节
+  hardware_interface.setJointAngles({ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 });
 
   while (1)
   {
-    // 控制关节
-    hardware_interface.setJointAngles({ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 });
     // 获取关节状态
     std::vector<double> joint_states = hardware_interface.getJointStates();
     // 打印关节状态
