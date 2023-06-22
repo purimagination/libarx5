@@ -56,7 +56,7 @@ void HardwareInterface::updateHardware()
         for (int i = 0; i < 6; i++)
         {
           can_interface->CAN_cmd_all(motor_ids[i], 0, 1, 0, 0, joint_torques[i]);
-          joint_states[i] = rv_motor_msg[motor_ids[i] - 1].angle_actual_float / 180 * M_PI;
+          joint_states[i] = rv_motor_msg[motor_ids[i] - 1].angle_actual_rad;
         }
       }
     }

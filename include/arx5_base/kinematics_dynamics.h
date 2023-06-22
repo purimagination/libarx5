@@ -27,11 +27,11 @@ public:
   // 运动学逆解，传入末端执行器的位姿，返回六个关节的角度
   std::vector<double> solveIK(std::vector<double> end_effector_pose);
 
-  // 动力学逆解，传入末端执行器的位姿，返回六个关节的力矩
-  std::vector<double> solveID(std::vector<double> end_effector_pose);
+  // 动力学逆解，传入末端执行器的受力，返回六个关节的力矩
+  std::vector<double> solveID(std::vector<double> end_effector_force);
 
   // 更新关节状态
-  void updateJointStates(std::vector<double> set_joint_states);
+  void updateJointStates(std::vector<double> set_joint_angle_states);
 
 private:
   // 角度约束
@@ -54,7 +54,7 @@ private:
   KDL::Frame init_frame;
 
   // 关节状态
-  KDL::JntArray joint_angles;
+  KDL::JntArray joint_angle_states;
   KDL::JntArray new_joint_angles;
   KDL::JntArray joint_velocities;
   KDL::JntArray new_joint_velocities;

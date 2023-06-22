@@ -35,7 +35,7 @@ KinematicsDynamics::KinematicsDynamics()
   idsolver_tor = std::make_shared<KDL::ChainIdSolver_RNE>(chain, KDL::Vector(0.0, 0.0, -9.8));
 
   // 初始化关节变量 (6个关节)
-  joint_angles = KDL::JntArray(6);
+  joint_angle_states = KDL::JntArray(6);
   new_joint_angles = KDL::JntArray(6);
   joint_velocities = KDL::JntArray(6);
   new_joint_velocities = KDL::JntArray(6);
@@ -43,7 +43,7 @@ KinematicsDynamics::KinematicsDynamics()
   ik_results = KDL::JntArray(6);
 
   // 得到初始末端状态 (init_frame)
-  int fk_status = fksolver_pos->JntToCart(joint_angles, init_frame);
+  int fk_status = fksolver_pos->JntToCart(joint_angle_states, init_frame);
   end_effector_pose = init_frame;
 
   // 创建线程
@@ -109,7 +109,7 @@ std::vector<double> KinematicsDynamics::solveIK(std::vector<double> end_effector
   KDL::Frame frame_target = KDL::Frame(rot, vector);
 
   // 计算逆解
-  int ik_status = iksolver_pos->CartToJnt(joint_angles, frame_target, ik_results);
+  int ik_status = iksolver_pos->CartToJnt(joint_angle_states, frame_target, ik_results);
 
   // 封装逆解结果为Vector
   std::vector<double> result = { pi2pi(ik_results(0)), pi2pi(ik_results(1)),  pi2pi(ik_results(2)),
@@ -135,21 +135,21 @@ void KinematicsDynamics::updateStates()
     // 更新关节状态
     for (int i = 0; i < 6; i++)
     {
-      new_joint_velocities(i) = (new_joint_angles(i) - joint_angles(i)) / (1.0 / thread_frequency);
-      joint_acclerations(i) = (new_joint_velocities(i) - joint_velocities(i)) / (1.0 / thread_frequency);
-      joint_velocities(i) = new_joint_velocities(i);
-      joint_angles(i) = new_joint_angles(i);
+      // new_joint_velocities(i) = (new_joint_angles(i) - joint_angle_states(i)) / (1.0 / thread_frequency);
+      // joint_acclerations(i) = (new_joint_velocities(i) - joint_velocities(i)) / (1.0 / thread_frequency);
+      // joint_velocities(i) = new_joint_velocities(i);
+      joint_angle_states(i) = new_joint_angles(i);
     }
     // 更新末端执行器位姿
     end_effector_pose = generateFrame(solveFK(
-        { joint_angles(0), joint_angles(1), joint_angles(2), joint_angles(3), joint_angles(4), joint_angles(5) }));
+        { joint_angle_states(0), joint_angle_states(1), joint_angle_states(2), joint_angle_states(3), joint_angle_states(4), joint_angle_states(5) }));
 
     // 频率控制
     rate.sleep();
   }
 }
 
-std::vector<double> KinematicsDynamics::solveID(std::vector<double> end_effector_pose)
+std::vector<double> KinematicsDynamics::solveID(std::vector<double> end_effector_force)
 {
   KDL::Vector force = KDL::Vector(0, 0, 0);
   KDL::Vector torque = KDL::Vector(0, 0, 0);
@@ -173,7 +173,7 @@ std::vector<double> KinematicsDynamics::solveID(std::vector<double> end_effector
 
   // 进行逆动力学解算
   KDL::JntArray results = KDL::JntArray(6);
-  idsolver_tor->CartToJnt(joint_angles, joint_velocities, joint_acclerations, wrenches, results);
+  idsolver_tor->CartToJnt(joint_angle_states, joint_velocities, joint_acclerations, wrenches, results);
 
   // 封装结果
   std::vector<double> result = { results(0), results(1), results(2), results(3), results(4), results(5) };
