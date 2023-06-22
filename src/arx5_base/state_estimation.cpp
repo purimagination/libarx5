@@ -1,7 +1,7 @@
 #include "arx5_base/state_estimation.h"
 
-StateEstimation::StateEstimation(){
-
+StateEstimation::StateEstimation()
+{
 };
 
 bool StateEstimation::ifDanger(std::vector<double> joint_states)

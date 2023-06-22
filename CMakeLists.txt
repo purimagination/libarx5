@@ -33,6 +33,9 @@ target_link_libraries(testKinematicsDynamics ${CMAKE_THREAD_LIBS_INIT} orocos-kd
 add_executable(testStateEstimation src/test/testStateEstimation.cpp ${SDK_SOURCES} ${UTILS_SOURCES} ${LIBCAN_SOURCES} ${HARDWARE_SOURCES})
 target_link_libraries(testStateEstimation ${CMAKE_THREAD_LIBS_INIT} orocos-kdl kdl_parser)
 
+add_executable(testTeaching src/test/testTeaching.cpp ${SDK_SOURCES} ${UTILS_SOURCES} ${LIBCAN_SOURCES} ${HARDWARE_SOURCES})
+target_link_libraries(testTeaching ${CMAKE_THREAD_LIBS_INIT} orocos-kdl kdl_parser)
+
 add_executable(testAll src/test/testAll.cpp ${SDK_SOURCES} ${UTILS_SOURCES} ${LIBCAN_SOURCES} ${HARDWARE_SOURCES})
 target_link_libraries(testAll ${CMAKE_THREAD_LIBS_INIT} orocos-kdl kdl_parser)
 
