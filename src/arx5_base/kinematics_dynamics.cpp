@@ -21,7 +21,7 @@ KinematicsDynamics::KinematicsDynamics()
   // chain.addSegment(KDL::Segment(KDL::Joint(KDL::Joint::RotX), generateFrame({ 0.0, 0.0, 0.0, -3.1415926535898, 0.0, 0.0 })));
 
   // 通过读取urdf，构造chain
-  std::string urdf_path = "/home/hanzx/dev/projects/arx5/libarx5/urdf/arx5_kdl.urdf";
+  std::string urdf_path = "/home/hanzx/Dev/Projects/libarx5/urdf/arx5_kdl.urdf";
   KDL::Tree tree;
   kdl_parser::treeFromFile(urdf_path, tree);
   bool exit_value = tree.getChain("base_link", "link6", chain);

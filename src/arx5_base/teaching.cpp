@@ -21,7 +21,7 @@ void Recorder::updateRecording(std::vector<double> data)
 void Recorder::endRecording()
 {
   std::string saving_path;
-  saving_path = "/home/hanzx/dev/projects/arx5/libarx5/saved_data";
+  saving_path = "/home/hanzx/Dev/Projects/libarx5/saved_data";
   saving_path.append("/");
   saving_path.append(saved_file_name);
   saving_path.append(".txt");
@@ -39,7 +39,7 @@ void Recorder::endRecording()
 Player::Player(std::string file_name)
 {
   std::string data_path;
-  data_path = "/home/hanzx/dev/projects/arx5/libarx5/saved_data";
+  data_path = "/home/hanzx/Dev/Projects/libarx5/saved_data";
   data_path.append("/");
   data_path.append(file_name);
   data_path.append(".txt");
