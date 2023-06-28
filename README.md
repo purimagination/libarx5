@@ -45,9 +45,9 @@ cd libarx5/build
 * HardwareInterface ✓
 * Rate ✓
 * JointTrajectories ✓
-* Kinematics ✓ Dynamics ✗
+* Kinematics ✓ Dynamics ✓
 * StateEstimation ✓ (不是Control中的状态估计，而是类似“态势评估”的概念。)
-* Teaching ✗
+* Teaching ✓
 * Calibration ✗
 * Teleop ✗
 * Initialization ✗
