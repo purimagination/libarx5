@@ -7,6 +7,17 @@
 #include "../libcan/SocketCAN.h"
 #include "A8120.h"
 
+typedef struct{
+    int8_t   temperature;
+    int16_t	 speed_rpm;
+    int16_t  real_current;
+    uint16_t position;
+    int8_t   round_cnt;
+    float    total_angle;
+    float    total_angle_last;
+	
+}m_rmd_t;
+
 // 负责can收发
 class ARX5_CAN
 {

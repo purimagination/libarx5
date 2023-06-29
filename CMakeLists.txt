@@ -54,4 +54,7 @@ target_link_libraries(gravityOffPlaying ${CMAKE_THREAD_LIBS_INIT} orocos-kdl kdl
 add_executable(calibrate src/examples/calibrate.cpp ${SDK_SOURCES} ${UTILS_SOURCES} ${LIBCAN_SOURCES} ${HARDWARE_SOURCES})
 target_link_libraries(calibrate ${CMAKE_THREAD_LIBS_INIT} orocos-kdl kdl_parser)
 
+add_executable(gravityOffTeleoperation src/examples/gravityOffTeleoperation.cpp ${SDK_SOURCES} ${UTILS_SOURCES} ${LIBCAN_SOURCES} ${HARDWARE_SOURCES})
+target_link_libraries(gravityOffTeleoperation ${CMAKE_THREAD_LIBS_INIT} orocos-kdl kdl_parser)
+
 add_library(arx5_sdk STATIC ${SDK_SOURCES} ${UTILS_SOURCES} ${LIBCAN_SOURCES} ${HARDWARE_SOURCES})
