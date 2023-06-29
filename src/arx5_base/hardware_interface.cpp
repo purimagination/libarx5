@@ -67,3 +67,18 @@ void HardwareInterface::updateHardware()
     }
   }
 }
+
+void HardwareInterface::calibrateAll()
+{
+  if(hardware_type == "real")
+  {
+    for(int i=0; i<6; i++)
+    {
+      can_interface->calibrateSingleMotor(i+1);
+    }
+  }
+  else
+  {
+    std::cout<<"invalid hardware_type for calibration"<<std::endl;
+  }
+}

@@ -22,6 +22,8 @@ public:
   void setJointAngles(std::vector<double> set_joint_angles);
   // 控制关节力矩
   void setJointTorques(std::vector<double> set_joint_torques);
+  // 标定电机
+  void calibrateAll();
 
 private:
   // 硬件类型（fake/real/sim)

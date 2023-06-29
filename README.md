@@ -27,9 +27,22 @@ make
 ```
 
 ## Run Demos
+* 零位
 ```sh
 cd libarx5/build
-./gravityOff # 重力补偿模式
+./zeroPosition
+```
+
+* 重力补偿
+```sh
+cd libarx5/build
+./gravityOff
+```
+
+* 标定
+```sh
+cd libarx5/build
+./calibrate
 ```
 
 ## Software Architecture
@@ -43,7 +56,7 @@ cd libarx5/build
 * Kinematics ✓ Dynamics ✓
 * StateEstimation ✓ (不是Control中的状态估计，而是类似“态势评估”的概念。)
 * Teaching ✓
-* Calibration ✗
+* Calibration ✓
 * Teleop ✗
 * Initialization ✗
 * UI ✗
