@@ -3,7 +3,7 @@
 int main()
 {
   // 生成硬件接口对象
-  HardwareInterface hardware_interface("real", "position");
+  HardwareInterface hardware_interface("real", "position", "can0");
   // 控制关节
   hardware_interface.setJointAngles({ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 });
 

@@ -13,7 +13,7 @@
 class HardwareInterface
 {
 public:
-  HardwareInterface(std::string init_hardware_type = "real", std::string init_control_mode = "position");
+  HardwareInterface(std::string init_hardware_type = "real", std::string init_control_mode = "position", std::string init_can_port="can0");
   ~HardwareInterface() = default;
 
   // 获取关节状态
@@ -37,7 +37,7 @@ private:
   // 关节了力矩指令
   std::vector<double> joint_torques = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
   // CAN通信接口
-  std::shared_ptr<can> can_interface;
+  std::shared_ptr<ARX5_CAN> can_interface;
   // 电机ID
   int motor_ids[6] = { 1, 2, 4, 5, 6, 7 };
   // 创建独立线程
