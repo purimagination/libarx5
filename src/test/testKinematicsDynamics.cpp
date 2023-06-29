@@ -3,7 +3,9 @@
 
 int main()
 {
-  KinematicsDynamics kinematics_dynamics;
+  // 机械臂urdf文件路径
+  std::string urdf_path = "/home/hanzx/Dev/Projects/libarx5/urdf/arx5_kdl.urdf";
+  KinematicsDynamics kinematics_dynamics(urdf_path);
 
   std::vector<double> fk_result;
   std::vector<double> ik_result;

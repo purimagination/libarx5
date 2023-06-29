@@ -1,18 +1,19 @@
 #include <arx5_base/teaching.h>
-#include <arx5_utils/rate.h>
+#include <arx5_base/rate.h>
 #include <iostream>
 
 int main()
 {
   int freq = 100;
   std::string file_name = "test";
-  Recorder recorder(file_name, freq);
+  std::string save_path = "/home/hanzx/Dev/Projects/libarx5/saved_data";
+  Recorder recorder(save_path, file_name, freq);
   Rate rate(freq);
   std::vector<double> data = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
   for(int i=0; i<100; i++)
   {
-    recorder.updateRecording(data);
+    recorder.writeData(data);
     for(int i=0; i<6; i++)
     {
       data[i] += 1.0;
@@ -22,7 +23,7 @@ int main()
 
   recorder.endRecording();
 
-  Player player(file_name);
+  Player player(save_path, file_name);
   float freq2 = player.getFrequency();
   std::cout<<"data frequency: "<<freq2<<std::endl;
   std::vector<double> data2 = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};

@@ -16,7 +16,7 @@ include_directories("/usr/include/eigen3")
 AUX_SOURCE_DIRECTORY(src/hardware HARDWARE_SOURCES)
 AUX_SOURCE_DIRECTORY(src/libcan LIBCAN_SOURCES)
 AUX_SOURCE_DIRECTORY(src/arx5_base SDK_SOURCES)
-AUX_SOURCE_DIRECTORY(src/arx5_utils UTILS_SOURCES)
+AUX_SOURCE_DIRECTORY(src/arx5_base UTILS_SOURCES)
 
 add_executable(testHardwareInterface src/test/testHardwareInterface.cpp ${SDK_SOURCES} ${UTILS_SOURCES} ${LIBCAN_SOURCES} ${HARDWARE_SOURCES})
 target_link_libraries(testHardwareInterface ${CMAKE_THREAD_LIBS_INIT} orocos-kdl kdl_parser)
@@ -36,8 +36,8 @@ target_link_libraries(testStateEstimation ${CMAKE_THREAD_LIBS_INIT} orocos-kdl k
 add_executable(testTeaching src/test/testTeaching.cpp ${SDK_SOURCES} ${UTILS_SOURCES} ${LIBCAN_SOURCES} ${HARDWARE_SOURCES})
 target_link_libraries(testTeaching ${CMAKE_THREAD_LIBS_INIT} orocos-kdl kdl_parser)
 
-add_executable(testAll src/test/testAll.cpp ${SDK_SOURCES} ${UTILS_SOURCES} ${LIBCAN_SOURCES} ${HARDWARE_SOURCES})
-target_link_libraries(testAll ${CMAKE_THREAD_LIBS_INIT} orocos-kdl kdl_parser)
+
+
 
 add_executable(zeroPosition src/examples/zeroPosition.cpp ${SDK_SOURCES} ${UTILS_SOURCES} ${LIBCAN_SOURCES} ${HARDWARE_SOURCES})
 target_link_libraries(zeroPosition ${CMAKE_THREAD_LIBS_INIT} orocos-kdl kdl_parser)

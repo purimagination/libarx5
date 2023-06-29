@@ -1,7 +1,7 @@
 #include <arx5_base/hardware_interface.h>
 #include <arx5_base/kinematics_dynamics.h>
 #include <arx5_base/teaching.h>
-#include <arx5_utils/rate.h>
+#include <arx5_base/rate.h>
 
 // 是否停止录制
 int stopRecording = 0;
@@ -9,6 +9,10 @@ int stopRecording = 0;
 float frequency = 100;
 // 录制数据文件名称
 std::string file_name = "gravity_off";
+// 录制数据文件保存路径
+std::string save_path = "/home/hanzx/Dev/Projects/libarx5/saved_data";
+// 机械臂urdf文件路径
+std::string urdf_path = "/home/hanzx/Dev/Projects/libarx5/urdf/arx5_kdl.urdf";
 
 // 线程函数，判断是否停止录制
 void ifStoping()
@@ -30,11 +34,11 @@ int main()
   // 生成硬件接口对象
   HardwareInterface hardware_interface("real", "torque");
   // 生成运动学、动力学求解器
-  KinematicsDynamics kinematics_dynamics;
+  KinematicsDynamics kinematics_dynamics(urdf_path);
   // 生成频率控制器
   Rate loop_rate(frequency);
   // 生成数据录制器
-  Recorder recorder(file_name, frequency);
+  Recorder recorder(save_path, file_name, frequency);
 
   // 末端关节受力
   std::vector<double> end_effector_force = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
@@ -59,7 +63,7 @@ int main()
     std::vector<double> joint_states = hardware_interface.getJointStates();
 
     // 记录关节状态
-    recorder.updateRecording(joint_states);
+    recorder.writeData(joint_states);
 
     // 更新运动学动力学求解器的关节状态
     kinematics_dynamics.updateJointStates(joint_states);

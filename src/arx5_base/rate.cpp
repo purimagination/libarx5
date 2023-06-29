@@ -1,4 +1,4 @@
-#include "arx5_utils/rate.h"
+#include "arx5_base/rate.h"
 
 Rate::Rate(double frequency) : expected_cycle_time_(std::chrono::duration<double>(1.0 / frequency))
 {

@@ -1,5 +1,5 @@
 #include "arx5_base/hardware_interface.h"
-#include "arx5_utils/rate.h"
+#include "arx5_base/rate.h"
 
 HardwareInterface::HardwareInterface(std::string init_hardware_type, std::string init_control_mode)
 {

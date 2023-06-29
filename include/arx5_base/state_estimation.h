@@ -19,11 +19,11 @@ private:
   std::vector<double> angle_upper_bound = { 1.57, 0.0, 3.14, 1.57, 1.57, 1.57 };
 
   // 执行器末端的位姿上下限 (x, y, z, roll, pitch, yaw)
-  std::vector<double> pose_lower_bound = { 0.0, -0.3, 0.0, -1.57, -1.57, -1.57 };
-  std::vector<double> pose_upper_bound = { 0.5, 0.3, 0.5, 1.57, 1.57, 1.57 };
+  // std::vector<double> pose_lower_bound = { 0.0, -0.3, 0.0, -1.57, -1.57, -1.57 };
+  // std::vector<double> pose_upper_bound = { 0.5, 0.3, 0.5, 1.57, 1.57, 1.57 };
 
   // 需要用到运动学求解器对关节角度进行正解计算
-  KinematicsDynamics kinematics_dynamics;
+  // KinematicsDynamics kinematics_dynamics;
 };
 
 #endif

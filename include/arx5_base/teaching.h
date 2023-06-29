@@ -8,21 +8,22 @@
 class Recorder
 {
   public:
-    Recorder(std::string file_name, float frequency);
+    Recorder(std::string save_path, std::string file_name, float frequency);
     ~Recorder() = default;
 
-    void updateRecording(std::vector<double> data);
+    void writeData(std::vector<double> data);
     void endRecording();
 
   private:
-    std::string saved_file_name;
-    std::string recording_data;
+    std::string _saved_file_name;
+    std::string _recording_data;
+    std::string _save_path;
 };
 
 class Player
 {
   public:
-    Player(std::string file_name);
+    Player(std::string save_path, std::string file_name);
     ~Player() = default;
 
     float getFrequency();
@@ -30,11 +31,10 @@ class Player
     bool isEnd();
 
   private:
-    std::ifstream record_stream;
-    std::string data;
-    float frequency;
-    int dataIndex = 0;
-    std::vector<double> top_data = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    std::ifstream _record_stream;
+    std::string _data;
+    float _frequency;
+    std::vector<double> _top_data = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 };
 
 #endif

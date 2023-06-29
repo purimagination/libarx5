@@ -13,12 +13,12 @@
 #include <thread>
 #include <memory>
 
-#include "arx5_utils/rate.h"
+#include "arx5_base/rate.h"
 
 class KinematicsDynamics
 {
 public:
-  KinematicsDynamics();
+  KinematicsDynamics(std::string urdf_path);
   ~KinematicsDynamics() = default;
 
   // 运动学正解，传入六个关节的角度，返回末端执行器的位姿
