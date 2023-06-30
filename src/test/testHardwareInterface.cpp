@@ -7,7 +7,7 @@ int main()
   // 控制关节
   hardware_interface.setJointAngles({ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 });
   // 获取关节状态
-  std::vector<double> joint_states = hardware_interface.getJointStates();
+  std::vector<double> joint_states = hardware_interface.getJointAngles();
   // 打印关节状态
   for (int i = 0; i < 6; i++)
   {
@@ -22,7 +22,7 @@ int main()
   // 等待1秒
   sleep(1);
   // 获取关节状态
-  joint_states = hardware_interface.getJointStates();
+  joint_states = hardware_interface.getJointAngles();
   // 打印关节状态
   for (int i = 0; i < 6; i++)
   {

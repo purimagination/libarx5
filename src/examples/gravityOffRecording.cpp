@@ -60,7 +60,7 @@ int main()
     loop_rate.sleep();
 
     // 获取关节状态
-    std::vector<double> joint_states = hardware_interface.getJointStates();
+    std::vector<double> joint_states = hardware_interface.getJointAngles();
 
     // 记录关节状态
     recorder.writeData(joint_states);

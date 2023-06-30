@@ -76,49 +76,22 @@ void ARX5_CAN::CAN_ReceiveFrame(can_frame_t *frame)
 {
     switch (frame->can_id)
     {
-    case 0x01:
-    case 0x02:
-    case 0x03:
-    case 0x04:
-    case 0x05:
-    case 0x06:
-    case 0x07:
-    case 0x08:
-    case 0x7FF:
-    {
-        RV_can_data_repack(frame->can_id, frame->data, frame->can_dlc, 0);
-        break;
-    }
-    case 0x205:
-    case 0x206:
-    case 0x207:
-    case 0x208:
-    case 0x209:
-    case 0x20A:
-    case 0x20B:
-    case 0x20C:
-    case 0x141:
-    {
-        rmd_01.total_angle_last=rmd_01.position;
-        rmd_01.speed_rpm=((int16_t)(frame->data[5]<<8) |(frame->data[4]))/57.3f;
-        rmd_01.position=((int16_t)(frame->data[7]<<8) |(frame->data[6]));	
-        rmd_01.real_current=((int16_t)(frame->data[2]<<8) |(frame->data[3]));
-        if (rmd_01.position - rmd_01.total_angle_last > 32768)
-            rmd_01.round_cnt--;
-        else if (rmd_01.position - rmd_01.total_angle_last < -32768)
-            rmd_01.round_cnt++;
-        rmd_01.total_angle = rmd_01.round_cnt * 65536 + rmd_01.position;					
-        break;
-    }
-    case 0x142:
-    {
-        rmd_9015_02.speed_rpm=((int16_t)(frame->data[5]<<8) |(frame->data[4]))/57.3f;
-        rmd_9015_02.position =((int16_t)(frame->data[7]<<8) |(frame->data[6]));	
-        break;
-    } 
-    default:
-    {
-        break;
-    }
+        case 0x01:
+        case 0x02:
+        case 0x03:
+        case 0x04:
+        case 0x05:
+        case 0x06:
+        case 0x07:
+        case 0x08:
+        case 0x7FF:
+        {
+            RV_can_data_repack(frame->can_id, frame->data, frame->can_dlc, 0);
+            break;
+        }
+        default:
+        {
+            break;
+        }
     }
 }

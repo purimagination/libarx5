@@ -31,14 +31,14 @@ int main()
     loop_rate.sleep();
 
     // 获取关节状态
-    std::vector<double> joint_states = hardware_interface.getJointStates();
+    std::vector<double> joint_states = hardware_interface.getJointAngles();
 
     // 打印关节状态
-    // for (int i = 0; i < 6; i++)
-    // {
-    //   std::cout << "[" << i << "] = " << joint_states[i]<<" ";
-    // }
-    // std::cout<<" ||";
+    for (int i = 0; i < 6; i++)
+    {
+      std::cout << "[" << i << "] = " << joint_states[i]<<" ";
+    }
+    std::cout<<" ||";
 
     // 更新运动学动力学求解器的关节状态
     kinematics_dynamics.updateJointStates(joint_states);
@@ -47,8 +47,8 @@ int main()
     id_result = kinematics_dynamics.solveID(end_effector_force);
 
     // 打印动力学逆解结果
-    // std::cout << "ID result: " << id_result[0] << ", " << id_result[1] << ", " << id_result[2] << ", " << id_result[3]
-    //           << ", " << id_result[4] << ", " << id_result[5] << std::endl;
+    std::cout << "ID result: " << id_result[0] << ", " << id_result[1] << ", " << id_result[2] << ", " << id_result[3]
+              << ", " << id_result[4] << ", " << id_result[5] << std::endl;
 
     // 将动力学逆解力矩赋值给关节
     t = id_result;

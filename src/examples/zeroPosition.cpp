@@ -3,7 +3,7 @@
 int main()
 {
   // 生成硬件接口对象
-  HardwareInterface hardware_interface("real", "position", "can1");
+  HardwareInterface hardware_interface("real", "position", "can0");
   // 控制关节
   hardware_interface.setJointAngles({ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 });
 
@@ -11,7 +11,7 @@ int main()
   sleep(1);
 
   // 获取关节状态
-  std::vector<double> joint_states = hardware_interface.getJointStates();
+  std::vector<double> joint_states = hardware_interface.getJointAngles();
   // 打印关节状态
   for (int i = 0; i < 6; i++)
   {
