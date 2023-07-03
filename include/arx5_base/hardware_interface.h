@@ -1,9 +1,7 @@
 #ifndef HARDWARE_INTERFACE_H
 #define HARDWARE_INTERFACE_H
 
-#include "../hardware/can.h"
-#include "../hardware/dbus.h"
-#include "../hardware/A8120.h"
+#include "arx5_base/can.h"
 
 #include <vector>
 #include <string>
@@ -38,7 +36,7 @@ private:
   std::vector<double> joint_torque_states = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
   // 关节角度指令
   std::vector<double> joint_angles = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
-  // 关节了力矩指令
+  // 关节力矩指令
   std::vector<double> joint_torques = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
   // CAN通信接口
   std::shared_ptr<ARX5_CAN> can_interface;

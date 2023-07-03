@@ -1,5 +1,6 @@
 #include "arx5_base/hardware_interface.h"
 #include "arx5_base/rate.h"
+#include <math.h>
 
 HardwareInterface::HardwareInterface(std::string init_hardware_type, std::string init_control_mode, std::string init_can_port)
 {
@@ -8,7 +9,6 @@ HardwareInterface::HardwareInterface(std::string init_hardware_type, std::string
   if (hardware_type == "real")
   {
     can_interface = std::make_shared<ARX5_CAN>(init_can_port);
-    extern OD_Motor_Msg rv_motor_msg[8];
   }
   std::cout<<"Hardware Interface Initialized. Hardware Type: "<<hardware_type<<", control_mode: "<<control_mode<<"."<<std::endl;
   // 创建线程
@@ -52,8 +52,8 @@ void HardwareInterface::updateHardware()
         for (int i = 0; i < 6; i++)
         {
           can_interface->sendPositionCommand(motor_ids[i], joint_angles[i] / M_PI * 180.0f, 300, 1000, 2);
-          joint_angle_states[i] = rv_motor_msg[motor_ids[i] - 1].angle_actual_float / 180 * M_PI;
-          joint_torque_states[i] = rv_motor_msg[motor_ids[i] - 1].current_actual_float;
+          joint_angle_states[i] = can_interface->getMotorState()[motor_ids[i] - 1].angle_actual_float / 180 * M_PI;
+          joint_torque_states[i] = can_interface->getMotorState()[motor_ids[i] - 1].current_actual_float;
         }
       }
       // 力矩控制
@@ -62,8 +62,8 @@ void HardwareInterface::updateHardware()
         for (int i = 0; i < 6; i++)
         {
           can_interface->sendMITCommand(motor_ids[i], 0, 1, 0, 0, joint_torques[i]);
-          joint_angle_states[i] = rv_motor_msg[motor_ids[i] - 1].angle_actual_rad;
-          joint_torque_states[i] = rv_motor_msg[motor_ids[i] - 1].current_actual_float;
+          joint_angle_states[i] = can_interface->getMotorState()[motor_ids[i] - 1].angle_actual_rad;
+          joint_torque_states[i] = can_interface->getMotorState()[motor_ids[i] - 1].current_actual_float;
         }
       }
     }

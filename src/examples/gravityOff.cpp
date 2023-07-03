@@ -5,7 +5,7 @@
 int main()
 {
   // 生成硬件接口对象
-  HardwareInterface hardware_interface("real", "torque");
+  HardwareInterface hardware_interface("real", "torque", "can1");
   // 机械臂urdf文件路径
   std::string urdf_path = "/home/hanzx/Dev/Projects/libarx5/urdf/arx5_kdl.urdf";
   // 生成运动学、动力学求解器
