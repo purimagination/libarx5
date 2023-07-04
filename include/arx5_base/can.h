@@ -27,15 +27,6 @@ typedef struct
     uint8_t motor_feedback; // motor CAN communication feedback.
 } MotorCommandFeedback;
 
-// 数据的不同写法
-union TypeConvert
-{
-	float to_float;
-	int to_int;
-	unsigned int to_uint;
-	uint8_t buf[4];
-};
-
 // 电机状态结构体
 typedef struct
 {
@@ -60,6 +51,15 @@ typedef struct
     bool getInitAngle = 0;
 } MotorState;
 
+// 使用Union来转换数据的不同写法
+union TypeConvert
+{
+	float to_float;
+	int to_int;
+	unsigned int to_uint;
+	uint8_t buf[4];
+};
+
 // 负责can收发
 class ARX5_CAN
 {
@@ -71,10 +71,12 @@ class ARX5_CAN
         void CAN_ReceiveFrame(can_frame_t *frame);
         // 标定单个电机
         void calibrateSingleMotor(uint16_t motor_id);
-        // 电机内置位控模式
-        void sendPositionCommand(uint16_t motor_id,float pos,uint16_t spd,uint16_t cur,uint8_t ack_status);
-        // MIT控制模式
-        void sendMITCommand(uint16_t motor_id, float kp, float kd, float pos, float spd, float tor);
+        // OD电机位置控制模式
+        void sendODPositionCommand(uint16_t motor_id,float pos,uint16_t spd,uint16_t cur,uint8_t ack_status);
+        // OD电机MIT控制模式
+        void sendODMITCommand(uint16_t motor_id, float kp, float kd, float pos, float spd, float tor);
+        // LK电机力矩控制模式
+        void sendLKTorqueCommand(int16_t torque);
         // 获取电机状态
         MotorState* getMotorState();
         

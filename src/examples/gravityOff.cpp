@@ -23,7 +23,7 @@ int main()
   std::vector<double> t = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
   // 初始给一个零力矩
-  hardware_interface.setJointTorques(id_result);
+  hardware_interface.setODJointTorques(id_result);
 
   while (1)
   {
@@ -52,7 +52,7 @@ int main()
 
     // 将动力学逆解力矩赋值给关节
     t = id_result;
-    hardware_interface.setJointTorques(t);
+    hardware_interface.setODJointTorques(t);
   }
 
   return 0;

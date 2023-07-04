@@ -27,7 +27,7 @@ int main()
   std::vector<double> t_diff = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
   // 初始给一个零力矩
-  hardware_interface.setJointTorques(id_result);
+  hardware_interface.setODJointTorques(id_result);
 
   while (1)
   {
@@ -38,7 +38,7 @@ int main()
     std::vector<double> joint_states = hardware_interface.getJointAngles();
     std::vector<double> torques = hardware_interface2.getJointTorques();
     // 控制从动机械臂关节角度
-    hardware_interface2.setJointAngles(joint_states);
+    hardware_interface2.setODJointAngles(joint_states);
 
     // 打印关节状态
     // for (int i = 0; i < 6; i++)
@@ -79,7 +79,7 @@ int main()
     }
 
     // 将动力学逆解力矩赋值给关节
-    hardware_interface.setJointTorques(t);
+    hardware_interface.setODJointTorques(t);
   }
 
   return 0;

@@ -48,7 +48,7 @@ int main()
   std::vector<double> joint_states = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
   // 初始给一个零力矩
-  hardware_interface.setJointTorques(id_result);
+  hardware_interface.setODJointTorques(id_result);
 
   // 创建线程
   std::thread thread_1(ifStoping);
@@ -72,7 +72,7 @@ int main()
     id_result = kinematics_dynamics.solveID(end_effector_force);
 
     // 将动力学逆解力矩赋值给关节
-    hardware_interface.setJointTorques(id_result);
+    hardware_interface.setODJointTorques(id_result);
   }
 
   recorder.endRecording();

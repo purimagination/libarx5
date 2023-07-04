@@ -5,7 +5,7 @@ int main()
   // 生成硬件接口对象
   HardwareInterface hardware_interface("real", "position", "can1");
   // 控制关节
-  hardware_interface.setJointAngles({ 0.1, 0.0, 0.0, 0.0, 0.0, 0.0 });
+  hardware_interface.setODJointAngles({ 0.1, 0.0, 0.0, 0.0, 0.0, 0.0 });
 
   // 等一秒钟
   sleep(1);

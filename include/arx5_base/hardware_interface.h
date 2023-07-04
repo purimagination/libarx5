@@ -19,9 +19,11 @@ public:
   // 获取关节力矩状态
   std::vector<double> getJointTorques();
   // 控制关节角度
-  void setJointAngles(std::vector<double> set_joint_angles);
+  void setODJointAngles(std::vector<double> set_joint_angles);
   // 控制关节力矩
-  void setJointTorques(std::vector<double> set_joint_torques);
+  void setODJointTorques(std::vector<double> set_joint_torques);
+  // 控制末端夹爪力矩
+  void setGripperTorque(float torque);
   // 标定电机
   void calibrateAll();
 
@@ -38,6 +40,8 @@ private:
   std::vector<double> joint_angles = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
   // 关节力矩指令
   std::vector<double> joint_torques = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+  // Gripper力矩指令
+  float _gripper_torque = 0.0;
   // CAN通信接口
   std::shared_ptr<ARX5_CAN> can_interface;
   // 电机ID

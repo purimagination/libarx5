@@ -34,7 +34,7 @@ int main()
     joint_states = player.getData();
 
     // 将动力学逆解力矩赋值给关节
-    hardware_interface.setJointAngles(joint_states);
+    hardware_interface.setODJointAngles(joint_states);
   }
 
   return 0;

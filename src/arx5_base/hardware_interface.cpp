@@ -26,12 +26,12 @@ std::vector<double> HardwareInterface::getJointTorques()
   return joint_torque_states;
 }
 
-void HardwareInterface::setJointAngles(std::vector<double> set_joint_angles)
+void HardwareInterface::setODJointAngles(std::vector<double> set_joint_angles)
 {
   joint_angles = set_joint_angles;
 }
 
-void HardwareInterface::setJointTorques(std::vector<double> set_joint_torques)
+void HardwareInterface::setODJointTorques(std::vector<double> set_joint_torques)
 {
   joint_torques = set_joint_torques;
 }
@@ -51,7 +51,7 @@ void HardwareInterface::updateHardware()
       {
         for (int i = 0; i < 6; i++)
         {
-          can_interface->sendPositionCommand(motor_ids[i], joint_angles[i] / M_PI * 180.0f, 300, 1000, 2);
+          can_interface->sendODPositionCommand(motor_ids[i], joint_angles[i] / M_PI * 180.0f, 300, 1000, 2);
           joint_angle_states[i] = can_interface->getMotorState()[motor_ids[i] - 1].angle_actual_float / 180 * M_PI;
           joint_torque_states[i] = can_interface->getMotorState()[motor_ids[i] - 1].current_actual_float;
         }
@@ -61,11 +61,12 @@ void HardwareInterface::updateHardware()
       {
         for (int i = 0; i < 6; i++)
         {
-          can_interface->sendMITCommand(motor_ids[i], 0, 1, 0, 0, joint_torques[i]);
+          can_interface->sendODMITCommand(motor_ids[i], 0, 1, 0, 0, joint_torques[i]);
           joint_angle_states[i] = can_interface->getMotorState()[motor_ids[i] - 1].angle_actual_rad;
           joint_torque_states[i] = can_interface->getMotorState()[motor_ids[i] - 1].current_actual_float;
         }
       }
+      can_interface->sendLKTorqueCommand(_gripper_torque);
     }
     // 假反馈
     else if (hardware_type == "fake")
@@ -88,4 +89,9 @@ void HardwareInterface::calibrateAll()
   {
     std::cout<<"invalid hardware_type for calibration"<<std::endl;
   }
+}
+
+void HardwareInterface::setGripperTorque(float torque)
+{
+  _gripper_torque = torque;
 }

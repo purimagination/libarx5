@@ -34,6 +34,9 @@ target_link_libraries(testStateEstimation ${CMAKE_THREAD_LIBS_INIT} orocos-kdl k
 add_executable(testTeaching src/test/testTeaching.cpp ${SDK_SOURCES} ${LIBCAN_SOURCES})
 target_link_libraries(testTeaching ${CMAKE_THREAD_LIBS_INIT} orocos-kdl kdl_parser)
 
+add_executable(test4005 src/test/test4005.cpp ${SDK_SOURCES} ${LIBCAN_SOURCES})
+target_link_libraries(test4005 ${CMAKE_THREAD_LIBS_INIT} orocos-kdl kdl_parser)
+
 
 
 

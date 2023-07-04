@@ -39,7 +39,7 @@ void ARX5_CAN::calibrateSingleMotor(uint16_t motor_id)
     }
 }
 
-void ARX5_CAN::sendPositionCommand(uint16_t motor_id,float pos,uint16_t spd,uint16_t cur,uint8_t ack_status)
+void ARX5_CAN::sendODPositionCommand(uint16_t motor_id,float pos,uint16_t spd,uint16_t cur,uint8_t ack_status)
 {
     can_frame_t frame;
     frame.can_dlc = 8;
@@ -54,7 +54,7 @@ void ARX5_CAN::sendPositionCommand(uint16_t motor_id,float pos,uint16_t spd,uint
     }
 }
 
-void ARX5_CAN::sendMITCommand(uint16_t motor_id, float kp, float kd, float pos, float spd, float tor)
+void ARX5_CAN::sendODMITCommand(uint16_t motor_id, float kp, float kd, float pos, float spd, float tor)
 {
     can_frame_t frame;
     frame.can_dlc = 8;
@@ -312,3 +312,26 @@ MotorState* ARX5_CAN::getMotorState()
 {
     return rv_motor_msg;
 }
+
+void ARX5_CAN::sendLKTorqueCommand(int16_t torque)
+{
+    can_frame_t frame;
+    frame.can_id = 0x280;
+    frame.can_dlc = 8;
+    frame.data[0] = torque;
+    frame.data[1] = torque >> 8;
+    frame.data[2] = 0.0;
+    frame.data[3] = 0.0;
+    frame.data[4] = 0.0;
+    frame.data[5] = 0.0;
+    frame.data[6] = 0.0;
+    frame.data[7] = 0.0;
+    if (can_adapter.is_open())
+    {
+        can_adapter.transmit(&frame);
+    }
+    else
+    {
+        std::cout << "Fail to open can bus" << std::endl;
+    }
+}                      
