@@ -4,7 +4,7 @@
 
 ```sh
 # Ubuntu 20.04
-sudo apt-get install liborocos-kdl1.4 libkdl-parser-dev can-utils net-tools
+sudo apt-get install liborocos-kdl-dev libkdl-parser-dev can-utils net-tools
 
 # Ubuntu 22.04
 sudo apt-get install liborocos-kdl-dev libkdl-parser-dev can-utils net-tools
@@ -48,7 +48,7 @@ cd libarx5/build
 ## Software Architecture
 ![architecture](docs/architecture.png)
 
-## TODO List
+## Roadmap
 
 * HardwareInterface ✓
 * Rate ✓
